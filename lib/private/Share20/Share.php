@@ -30,6 +30,7 @@ use OCP\Files\Node;
 use OCP\Files\NotFoundException;
 use OCP\IUserManager;
 use OCP\Share\Exceptions\IllegalIDChangeException;
+use OCP\Share\IShare;
 
 class Share implements \OCP\Share\IShare {
 
@@ -84,6 +85,9 @@ class Share implements \OCP\Share\IShare {
 
 	/** @var ICacheEntry|null */
 	private $nodeCacheEntry;
+
+	/** @var bool */
+	private $isReadOnly = false;
 
 	public function __construct(IRootFolder $rootFolder, IUserManager $userManager) {
 		$this->rootFolder = $rootFolder;
@@ -513,5 +517,14 @@ class Share implements \OCP\Share\IShare {
 	 */
 	public function getNodeCacheEntry() {
 		return $this->nodeCacheEntry;
+	}
+
+	public function setReadOnly(bool $ro): IShare {
+		$this->isReadOnly = $ro;
+		return $this;
+	}
+
+	public function getReadOnly(): bool {
+		return $this->isReadOnly;
 	}
 }

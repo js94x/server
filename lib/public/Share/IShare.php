@@ -418,4 +418,25 @@ interface IShare {
 	 * @since 11.0.0
 	 */
 	public function getNodeCacheEntry();
+
+	/**
+	 * Sets a shares readOnly state
+	 * This is mainly for public shares. It will signal that the share page should
+	 * hide download buttons etc.
+	 *
+	 * @param bool $ro
+	 * @return IShare
+	 * @since 15.0.0
+	 */
+	public function setReadOnly(bool $ro): IShare;
+
+	/**
+	 * Is a share read only.
+	 * This is mainly for public shares. It will signal that the share page should
+	 * hide download buttons etc.
+	 *
+	 * @return bool
+	 * @since 15.0.0
+	 */
+	public function getReadOnly(): bool;
 }
