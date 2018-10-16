@@ -76,6 +76,9 @@ class EmptyContentSecurityPolicy {
 	/** @var array Domains from which web-workers can be loaded */
 	protected $allowedWorkerSrcDomains = null;
 
+	/** @var array Locations to report violations to */
+	protected $reportTo = null;
+
 	/**
 	 * Whether inline JavaScript snippets are allowed or forbidden
 	 * @param bool $state
@@ -384,6 +387,30 @@ class EmptyContentSecurityPolicy {
 	}
 
 	/**
+	 * Add location to report CSP violations to
+	 *
+	 * @param string $location
+	 * @return $this
+	 * @since 15.0.0
+	 */
+	public function addReportTo(string $location) {
+		$this->reportTo[] = $location;
+		return $this;
+	}
+
+	/**
+	 * Remove a location to report to
+	 *
+	 * @param string $location
+	 * @return $this
+	 * @since 15.0.0
+	 */
+	public function removeReportTo(string $location) {
+		$this->reportTo = array_diff($this->reportTo, [$location]);
+		return $this;
+	}
+
+	/**
 	 * Get the generated Content-Security-Policy as a string
 	 * @return string
 	 * @since 8.1.0
@@ -469,6 +496,11 @@ class EmptyContentSecurityPolicy {
 
 		if (!empty($this->allowedWorkerSrcDomains)) {
 			$policy .= 'worker-src ' . implode(' ', $this->allowedWorkerSrcDomains);
+			$policy .= ';';
+		}
+
+		if (!empty($this->reportTo)) {
+			$policy .= 'report-uri ' . implode(' ', $this->reportTo);
 			$policy .= ';';
 		}
 
