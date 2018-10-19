@@ -92,5 +92,5 @@ class ContentSecurityPolicy extends EmptyContentSecurityPolicy {
 	protected $allowedWorkerSrcDomains = [];
 
 	/** @var array Locations to report violations to */
-	protected $reportTo;
+	protected $reportTo = [];
 }
