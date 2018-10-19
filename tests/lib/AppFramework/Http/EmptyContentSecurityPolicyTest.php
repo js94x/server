@@ -466,13 +466,4 @@ class EmptyContentSecurityPolicyTest extends \Test\TestCase {
 		$this->contentSecurityPolicy->addReportTo("https://my-other-report-uri.com");
 		$this->assertSame($expectedPolicy, $this->contentSecurityPolicy->buildPolicy());
 	}
-
-	public function testGetPolicyWithRemovingReportUri() {
-		$expectedPolicy = "default-src 'none';base-uri 'none';manifest-src 'self';report-uri https://my-other-report-uri.com";
-
-		$this->contentSecurityPolicy->addReportTo('https://my-report-uri.com');
-		$this->contentSecurityPolicy->addReportTo('https://my-other-report-uri.com');
-		$this->contentSecurityPolicy->removeReportTo('https://my-report-uri.com');
-		$this->assertSame($expectedPolicy, $this->contentSecurityPolicy->buildPolicy());
-	}
 }

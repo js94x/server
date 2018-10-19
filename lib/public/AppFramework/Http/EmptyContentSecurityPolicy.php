@@ -399,18 +399,6 @@ class EmptyContentSecurityPolicy {
 	}
 
 	/**
-	 * Remove a location to report to
-	 *
-	 * @param string $location
-	 * @return $this
-	 * @since 15.0.0
-	 */
-	public function removeReportTo(string $location) {
-		$this->reportTo = array_diff($this->reportTo, [$location]);
-		return $this;
-	}
-
-	/**
 	 * Get the generated Content-Security-Policy as a string
 	 * @return string
 	 * @since 8.1.0
